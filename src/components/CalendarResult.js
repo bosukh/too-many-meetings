@@ -7,27 +7,46 @@ import DailyLineChart from './CalendarResult/DailyLineChart'
 import AttendeeScatterChart from './CalendarResult/AttendeeScatterChart'
 import { Row } from 'react-materialize'
 
+const NoResult = ({}) => (
+  <div style={{textAlign:'center'}}>
+    <Row>
+      <h3>
+        There seems to be no meetings on you calendar for the past 3 months.
+      </h3>
+    </Row>
+  </div>
+)
 class CalendarResult extends React.Component {
 
   constructor(props) {
     super(props)
   }
-  
+
   render() {
     const avgHoursDaily = Math.round(this.props.totalHours/this.props.workDays * 10) / 10
     const avgMeetingsWeekly = Math.round(this.props.totalMeetings/this.props.totalWeeks * 10) / 10
     const avgHoursWeekly = Math.round(this.props.totalHours/this.props.totalWeeks * 10) / 10
+    const totalHours = Math.round(this.props.totalHours * 10) / 10
+    const attendeeAnalysis = (this.props.byAttendee || []).length
+                             ? <AttendeeScatterChart data = {this.props.byAttendee || []} />
+                             : null
+    var pastAnalysis = <NoResult/>
+    var dailyLineChart = null
+    if ((this.props.dailyAggregatedEvents || []).length ){
+      pastAnalysis = <PastAnalysis totalMeetings = {this.props.totalMeetings}
+                totalHours = {this.props.totalHours}
+                avgHoursWeekly = {avgHoursWeekly}
+                avgMeetingsWeekly = {avgMeetingsWeekly}
+                avgHoursDaily = {avgHoursDaily} />
+      dailyLineChart  = <DailyLineChart data = {this.props.dailyAggregatedEvents || []} />
+    }
     return (
       <div>
-        <PastAnalysis totalMeetings = {this.props.totalMeetings}
-          totalHours = {this.props.totalHours}
-          avgHoursWeekly = {avgHoursWeekly}
-          avgMeetingsWeekly = {avgMeetingsWeekly}
-          avgHoursDaily = {avgHoursDaily} />
+        {pastAnalysis}
         <br/>
-        <DailyLineChart data = {this.props.dailyAggregatedEvents || []} />
+        {dailyLineChart}
         <br/>
-        <AttendeeScatterChart data = {this.props.byAttendee || []} />
+        {attendeeAnalysis}
         <br/>
         <FutureAnalysis data = {this.props.nextWeekEvents} />
       </div>
