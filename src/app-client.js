@@ -16,7 +16,7 @@ let store = createStore(rootReducer,
     loggerMiddleware
   )
 )
-console.log(store)
+
 store.dispatch(AuthInit())
 
 window.onload = () => {

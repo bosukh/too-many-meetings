@@ -12,9 +12,11 @@ When counting the calendar events as meetings, I consider the followings.
 - Day-long events must not be the meetings.
 - Event has to be confirmed.
 - Event is on the weekday.
+- Events outside of normal work hours does not count.
+- If events starts before 8AM or ends after 5PM, count as one. However partially count the time.  
+  ex) 7:30 - 9:00 event -> one event with duration one hour.
 
 ToDos
-- Exclude events outside of normal work hours, or partially count.
 - Add onClick event triggered table next to daily summary plot to show details
 - Add onClick event triggered table next to scatter plot to show details
 - Add more text and visualization to NextWeek Section

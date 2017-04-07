@@ -25,11 +25,30 @@ const mapStateToProps = (state) => {
         return attendee.self == true
       })[0].responseStatus === 'accepted'
     }
+    if (event.end.dateTime === undefined){
+      return false // If event is allday (in date, not datetime), it must not be a meeting.
+    }
+    if (new Date(event.start.dateTime) >= (new Date(event.start.dateTime)).setHours(17,0,0,0)){
+      return false // if event start at 5pm or later, don't count.
+    }
+    if (new Date(event.end.dateTime) <= (new Date(event.start.dateTime)).setHours(8,0,0,0)){
+      return false // if event started on the day and is finished before 8am, don't count.
+    }
     return event.end.dateTime !== undefined  & // If event is allday (in date, not datetime), it must not be a meeting.
       event.status === "confirmed" & invitationAccepted
   }).map((event) => {
     const date = (new Date(event.start.dateTime)).setHours(0,0,0,0)
-    const duration = (new Date(event.end.dateTime) - new Date(event.start.dateTime))/(1000*60*60)
+    const workDayStart = (new Date(event.start.dateTime)).setHours(8,0,0,0)
+    const workDayEnd = (new Date(event.start.dateTime)).setHours(17,0,0,0)
+    var start = new Date(event.start.dateTime)
+    var end = new Date(event.end.dateTime)
+    if (start < workDayStart) {
+      start = workDayStart
+    }
+    if (end > workDayEnd) {
+      end = workDayEnd
+    }
+    const duration = (end - start)/(1000*60*60)
     const attendees = event.attendees ?
       event.attendees.filter((attendee)=>{
         return attendee.self !== true

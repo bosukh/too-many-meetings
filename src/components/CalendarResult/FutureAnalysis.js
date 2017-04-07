@@ -8,7 +8,7 @@ const Result = ({ meetingCount, totalHours }) => (
   <div>
     <Row>
       <h5>
-        <Icon>play_arrow</Icon>  You have {meetingCount} events/meetings.
+        <Icon>play_arrow</Icon> You have {meetingCount} events/meetings.
       </h5>
     </Row>
     <Row>
