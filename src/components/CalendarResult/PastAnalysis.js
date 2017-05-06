@@ -34,12 +34,12 @@ const PastAnalysis = ({ totalMeetings,
     </Row>
     <Row>
       <h5>
-        <Icon>play_arrow</Icon> That is {avgMeetingsWeekly} events/meetings per week on average.
+        <Icon>play_arrow</Icon> That is {parseInt(avgMeetingsWeekly*100)/100} events/meetings per week on average.
       </h5>
     </Row>
     <Row>
       <h5>
-        <Icon>play_arrow</Icon> You spent {avgHoursWeekly} hours in the events/meetings per week on average.
+        <Icon>play_arrow</Icon> You spent {parseInt(avgHoursWeekly*100)/100} hours in the events/meetings per week on average.
       </h5>
     </Row>
     <br/>
@@ -50,17 +50,17 @@ const PastAnalysis = ({ totalMeetings,
     </Row>
     <Row>
       <h5>
-        <Icon>play_arrow</Icon> That is {avgHoursDaily} hours per workday on average.
+        <Icon>play_arrow</Icon> That is {parseInt(avgHoursDaily*100)/100} hours per workday on average.
       </h5>
     </Row>
     <Row>
       <h5>
-        <Icon>play_arrow</Icon> You probably had {avgHoursDaily ? 9 - avgHoursDaily : 0} hours to get your work done.
+        <Icon>play_arrow</Icon> You probably had {parseInt((avgHoursDaily ? 9 - avgHoursDaily : 0)*100)/100} hours to get your work done.
       </h5>
     </Row>
     <Row>
       <h5>
-        <Icon>play_arrow</Icon> If we take out lunch, it becomes {avgHoursDaily ? 8 - avgHoursDaily : 0} hours
+        <Icon>play_arrow</Icon> If we take out lunch, it becomes {parseInt((avgHoursDaily ? 8 - avgHoursDaily : 0)*100)/100} hours
       </h5>
     </Row>
   </div>

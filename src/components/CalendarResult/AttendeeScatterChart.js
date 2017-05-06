@@ -16,18 +16,18 @@ class CustomTooltip extends React.Component {
           <p className="name">{payload.name}</p>
           <p className="label">{payload.totalHours} hrs</p>
           <p className="label">{payload.totalNum} meetings</p>
-          <p className="label">{payload.avgHourPerEvent}  hr/meeting</p>
+          <p className="label">{parseInt(payload.avgHourPerEvent*100)/100}  hr/meeting</p>
         </div>
       );
     }
     return null
   }
 }
-CustomTooltip.propTypes= {
-  name: PropTypes.string,
-  avgHourPerEvent: PropTypes.array,
-  label: PropTypes.string
-}
+// CustomTooltip.propTypes= {
+//   name: PropTypes.string,
+//   avgHourPerEvent: PropTypes.array,
+//   label: PropTypes.string
+// }
 
 const AttendeeScatterChart = ({data}) => (
   <div>

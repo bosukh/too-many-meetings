@@ -6,6 +6,24 @@ import {LineChart, Line, XAxis, YAxis,
 Brush} from 'recharts'
 import {Dropdown, Button, NavItem, Row, Col} from 'react-materialize'
 
+class CustomTooltip extends React.Component {
+  render() {
+    const { active } = this.props
+    if (active) {
+      const { payload } = this.props.payload[0]
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{payload.totalHours} hrs</p>
+          <p className="label">{payload.totalNum} meetings</p>
+          <p className="label">{parseInt(payload.avgHourPerEvent*100)/100}  hr/meeting</p>
+        </div>
+      );
+    }
+    return null
+  }
+}
+
+
 class DailyLineChart extends React.Component {
 
   constructor(props) {
@@ -40,7 +58,7 @@ class DailyLineChart extends React.Component {
                 <XAxis dataKey="date"/>
                 <YAxis/>
                 <CartesianGrid strokeDasharray="3 3"/>
-                <Tooltip/>
+                <Tooltip content={<CustomTooltip/>}/>
                 <Line type="monotone" name={this.state.dataName} dataKey={this.state.dataKey}
                   stroke="#26a69a" activeDot={{r: 8}} unit=' hr'/>
                 <Brush dataKey='date' height={30} stroke="#26a69a"/>

@@ -49,7 +49,6 @@ class FutureAnalysis extends React.Component {
     var result = this.props.data.length
                  ? <Result meetingCount={this.props.data.length} totalHours={totalHours} />
                : <NoResult />
-               console.log(result)
     return (
       <div className='statements'>
         <br/>
