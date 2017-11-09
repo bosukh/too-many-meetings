@@ -70,7 +70,7 @@ export function AuthInit() {
     gapi.load('client:auth2', () => {
       gapi.client.init({
         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-        clientId: '26806576869-c73i9b2v985rp2hfbkg3oqgs00ush20b.apps.googleusercontent.com',
+        clientId: '30825666613-5gpq61gmjoimta7r2najtv6t8l8kclkj.apps.googleusercontent.com',
         scope: "https://www.googleapis.com/auth/calendar.readonly"
       }).then(()=>{
         if (gapi.auth2.getAuthInstance().isSignedIn.get()){
